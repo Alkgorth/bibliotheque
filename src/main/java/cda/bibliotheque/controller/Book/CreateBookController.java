@@ -7,9 +7,9 @@ import cda.bibliotheque.dao.BookDAO;
 import cda.bibliotheque.model.Book;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 public class CreateBookController {
     
@@ -20,17 +20,29 @@ public class CreateBookController {
     private TextField inputTitle;
 
     @FXML
-    private TextField actionStatus;
+    private ChoiceBox<String> inputAvailability;
 
     private final BookDAO bookDAO = new BookDAO();
+
+    @FXML
+    public void initialize() {
+        inputAvailability.getItems().addAll("Oui", "Non");
+        inputAvailability.setValue("Oui");
+    }
 
     @FXML
     void submit(ActionEvent event) throws IOException {
         Book book = new Book();
         book.setRelease_date(inputReleaseDate.getValue());
         book.setTitle(inputTitle.getText());
-        book.setAvailable(true);
+        book.setAvailable("Oui".equals(inputAvailability.getValue()));
+
         bookDAO.addBook(book);
-        actionStatus.setText("Livre ajouté avec succès !");
+        App.setRoot("books/book");
+    }
+    
+    @FXML
+    private void switchToBooks() throws IOException {
+        App.setRoot("books/book");
     }
 }

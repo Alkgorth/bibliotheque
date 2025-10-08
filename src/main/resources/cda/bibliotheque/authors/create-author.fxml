@@ -21,7 +21,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="inputLastName" alignment="TOP_CENTER">
+      <TextField fx:id="inputLastName" alignment="TOP_LEFT">
          <VBox.margin>
             <Insets top="5.0" />
          </VBox.margin>
@@ -31,7 +31,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="inputFirstName" alignment="TOP_CENTER" layoutX="35.0" layoutY="85.0" />
+      <TextField fx:id="inputFirstName" alignment="TOP_LEFT" layoutX="35.0" layoutY="85.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="131.0" text="Date de naissance">
          <VBox.margin>
             <Insets top="20.0" />

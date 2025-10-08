@@ -44,7 +44,6 @@ public class BookController {
 
     @FXML
     public void initialize(){
-        // Initialisation des colonnes
         colTitle.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getTitle()));
         colIsAvailable.setCellValueFactory(cell -> new SimpleBooleanProperty(cell.getValue().isAvailable()));
         colReleaseDate.setCellValueFactory(cell -> new SimpleObjectProperty<LocalDate>(cell.getValue().getRelease_date()));

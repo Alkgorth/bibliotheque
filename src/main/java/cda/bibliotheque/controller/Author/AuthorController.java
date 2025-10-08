@@ -45,7 +45,6 @@ public class AuthorController {
 
     @FXML
     public void initialize(){
-        // Initialisation des colonnes
         colFirstName.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFirstname()));
         colLastName.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getLastname()));
         colBornAt.setCellValueFactory(cell -> new SimpleObjectProperty<LocalDate>(cell.getValue().getBorn_at()));

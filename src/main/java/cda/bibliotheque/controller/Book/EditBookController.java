@@ -40,7 +40,7 @@ public class EditBookController {
             if (newBook != null) {
                 inputReleaseDate.setValue(newBook.getRelease_date());
                 inputTitle.setText(newBook.getTitle());
-                actionStatus.setText(newBook.isAvailable() ? "Disponible" : "Indisponible");
+                actionStatus.setText(newBook.isAvailable() ? "Oui" : "Non");
             }
         });
     }
