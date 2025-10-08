@@ -2,7 +2,6 @@ package cda.bibliotheque.controller.Book;
 
 import java.io.IOException;
 
-import cda.bibliotheque.App;
 import cda.bibliotheque.dao.BookDAO;
 import cda.bibliotheque.model.Book;
 import javafx.event.ActionEvent;
@@ -10,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CreateBookController {
     
@@ -21,8 +21,9 @@ public class CreateBookController {
 
     @FXML
     private ChoiceBox<String> inputAvailability;
-
+    
     private final BookDAO bookDAO = new BookDAO();
+    private BookController parentController;
 
     @FXML
     public void initialize() {
@@ -36,13 +37,24 @@ public class CreateBookController {
         book.setRelease_date(inputReleaseDate.getValue());
         book.setTitle(inputTitle.getText());
         book.setAvailable("Oui".equals(inputAvailability.getValue()));
-
         bookDAO.addBook(book);
-        App.setRoot("books/book");
+        if (parentController != null) {
+            parentController.refreshBooks();
+        }
+        closeWindow();
     }
     
     @FXML
     private void switchToBooks() throws IOException {
-        App.setRoot("books/book");
+        closeWindow();
+    }
+
+    public void setParentController(BookController parentController) {
+        this.parentController = parentController;
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) inputTitle.getScene().getWindow();
+        stage.close();
     }
 }

@@ -49,6 +49,7 @@ public class EditBookController {
 
     }
 
+    //Déclenche le listener
     public void setBook(Book book) {
         this.book.set(book);
     }

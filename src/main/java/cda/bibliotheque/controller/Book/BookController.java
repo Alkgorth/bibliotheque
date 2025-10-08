@@ -94,9 +94,24 @@ public class BookController {
         booksTable.setItems(booksList);
     }
 
+    public void refreshBooks() {
+        loadBooks();
+    }
+
     @FXML
     private void switchToCreateBook() throws IOException {
-        App.setRoot("books/create-book");
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("books/create-book.fxml"));
+            Parent root = loader.load();
+            CreateBookController controller = loader.getController();
+            controller.setParentController(this);
+            Stage stage = new Stage();
+            stage.setTitle("Créer un nouveau livre");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
