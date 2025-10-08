@@ -1,5 +1,6 @@
 package cda.bibliotheque.controller.Book;
 
+import cda.bibliotheque.App;
 import cda.bibliotheque.dao.BookDAO;
 import cda.bibliotheque.model.Book;
 import java.io.IOException;
@@ -30,6 +31,25 @@ public class EditBookController {
         newBook.setTitle(inputTitle.getText());
         newBook.setAvailable(true);
         bookDAO.updateBook(newBook);
-        actionStatus.setText("Livre modifié avec succès !");
+        App.setRoot("books/authors");
+    }
+
+    @FXML
+    public void initialize(){
+        book.addListener((obs, oldBook, newBook) -> {
+            if (newBook != null) {
+                inputReleaseDate.setValue(newBook.getRelease_date());
+                inputTitle.setText(newBook.getTitle());
+                actionStatus.setText(newBook.isAvailable() ? "Disponible" : "Indisponible");
+            }
+        });
+    }
+
+    public EditBookController(){
+
+    }
+
+    public void setBook(Book book) {
+        this.book.set(book);
     }
 }
