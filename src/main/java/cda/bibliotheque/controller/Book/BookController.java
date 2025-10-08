@@ -60,6 +60,7 @@ public class BookController {
                         Parent root = loader.load();
                         EditBookController controller = loader.getController();
                         controller.setBook(bookToEdit);
+                        controller.setParentController(BookController.this);
                         Stage stage = new Stage();
                         stage.setTitle("Modifier un livre");
                         stage.setScene(new Scene(root));
