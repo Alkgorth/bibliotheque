@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cda.bibliotheque.controller.Author.EditAuthorController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="579.0" text="Modification un auteur" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Nom">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="inputLastName" alignment="TOP_LEFT">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </TextField>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="63.0" text="Prénom">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="inputFirstName" alignment="TOP_LEFT" layoutX="35.0" layoutY="85.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="131.0" text="Date de naissance">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <DatePicker fx:id="inputDateBornAt" prefHeight="25.0" prefWidth="559.0" />
+      <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="588.0" text="Enregistrer" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets top="25.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
+</VBox>
