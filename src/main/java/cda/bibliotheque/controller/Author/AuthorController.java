@@ -2,7 +2,6 @@ package cda.bibliotheque.controller.Author;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 import cda.bibliotheque.App;
 import cda.bibliotheque.dao.AuthorDAO;
@@ -17,13 +16,13 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.Node;
 
 public class AuthorController {
+
+    private final ObservableList<Author> authorsList = FXCollections.observableArrayList();
+    private final AuthorDAO authorDAO = new AuthorDAO();
 
     @FXML
     private TableView<Author> authorsTable;
@@ -40,8 +39,6 @@ public class AuthorController {
     @FXML
     private TableColumn<Author, Void> colActions;
 
-    private final ObservableList<Author> authorsList = FXCollections.observableArrayList();
-    private final AuthorDAO authorDAO = new AuthorDAO();
 
     @FXML
     public void initialize(){

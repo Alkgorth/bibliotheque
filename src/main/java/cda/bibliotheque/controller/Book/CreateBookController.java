@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 public class CreateBookController {
     
+    private final BookDAO bookDAO = new BookDAO();
+    private BookController parentController;
+    
     @FXML
     private DatePicker inputReleaseDate;
 
@@ -22,8 +25,6 @@ public class CreateBookController {
     @FXML
     private ChoiceBox<String> inputAvailability;
     
-    private final BookDAO bookDAO = new BookDAO();
-    private BookController parentController;
 
     @FXML
     public void initialize() {

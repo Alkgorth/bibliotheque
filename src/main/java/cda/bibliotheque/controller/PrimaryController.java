@@ -15,4 +15,14 @@ public class PrimaryController {
     private void switchToBooks() throws IOException {
         App.setRoot("books/book");
     }
+
+    @FXML
+    private void switchToEditors() throws IOException {
+        App.setRoot("editors/editor");
+    }
+
+    @FXML
+    private void switchToClients() throws IOException {
+        App.setRoot("clients/client");
+    }
 }

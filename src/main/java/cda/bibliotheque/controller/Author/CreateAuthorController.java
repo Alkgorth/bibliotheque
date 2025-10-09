@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 
 public class CreateAuthorController {
 
+    private final AuthorDAO authorDAO = new AuthorDAO();
+    
     @FXML
     private DatePicker inputDateBornAt;
 
@@ -20,7 +22,6 @@ public class CreateAuthorController {
     @FXML
     private TextField inputLastName;
 
-    private final AuthorDAO authorDAO = new AuthorDAO();
 
     @FXML
     void submit(ActionEvent event) throws IOException {
