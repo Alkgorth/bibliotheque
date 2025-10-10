@@ -2,7 +2,6 @@ package cda.bibliotheque.controller.Book;
 
 import cda.bibliotheque.App;
 import cda.bibliotheque.model.Book;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +34,9 @@ public class BookController {
     private TableColumn<Book, LocalDate> colReleaseDate;
 
     @FXML
+    private TableColumn<Book, String> colAuthors;
+
+    @FXML
     private TableColumn<Book, Boolean> colIsAvailable;
     
     @FXML
@@ -45,12 +48,41 @@ public class BookController {
     @FXML
     public void initialize(){
         colTitle.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getTitle()));
-        colIsAvailable.setCellValueFactory(cell -> new SimpleBooleanProperty(cell.getValue().isAvailable()));
+        colIsAvailable.setCellFactory(column -> new TableCell<Book, Boolean>(){
+            private final CheckBox checkBox = new CheckBox();
+            {
+                checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
+                    Book book = getTableRow().getItem();
+                    if (book != null) {
+                        book.setAvailable(newValue);
+                        bookDAO.updateBook(book);
+                        System.out.println("Disponibilité du livre '" + book.getTitle() + "' mise à jour : " + newValue);
+                    }
+                });
+            }
+            
+            @Override
+            protected void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    checkBox.setSelected(item);
+                    setGraphic(checkBox);
+                }
+            }
+        });
+        colIsAvailable.setCellValueFactory(cell -> {
+            Book book = cell.getValue();
+            return new SimpleObjectProperty<>(book.isAvailable());
+        });
+        
         colReleaseDate.setCellValueFactory(cell -> new SimpleObjectProperty<LocalDate>(cell.getValue().getRelease_date()));
+        colAuthors.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().toStringAuthors()));
         colActions.setCellFactory(cell -> new TableCell<>(){
             private final Button buttonEdit = new Button("Modifier");
             private final Button buttonDelete = new Button("Supprimer");
-            private final HBox box = new HBox(10, buttonEdit, buttonDelete);
+            private final VBox box = new VBox(10, buttonEdit, buttonDelete);
             {
                 buttonEdit.setOnAction(event -> {
                     int index = getIndex();
@@ -94,6 +126,13 @@ public class BookController {
         booksList.setAll(bookDAO.getAllBooks());
         booksTable.setItems(booksList);
     }
+
+    /*
+     * private void loadBooks() {
+     *  List<Book> books = bookDAO.getAllBook();
+     *  this.booksList.setAll(books);
+     * }
+     */
 
     public void refreshBooks() {
         loadBooks();

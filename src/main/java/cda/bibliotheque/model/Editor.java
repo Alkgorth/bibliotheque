@@ -1,12 +1,15 @@
 package cda.bibliotheque.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Date;
 
 public class Editor {
     private int id;
     private String label;
     private LocalDate created_at;
+    private List<Book> booksDistribute = new ArrayList<>();
 
     public Editor() {
     }
@@ -17,7 +20,7 @@ public class Editor {
         this.created_at = created_at;
     }
     
-    public Editor(int id, String label, Date created_at) {
+    public Editor(int id, String label, Date created_at, List<Book> books) {
         this.id = id;
         this.label = label;
         this.created_at = created_at.toLocalDate();
@@ -35,6 +38,9 @@ public class Editor {
     public Date getCreated_at_Date() {
         return Date.valueOf(created_at);
     }
+    public List<Book> getBooksDistribute() {
+        return booksDistribute;
+    }
 
     public void setLabel(String label) {
         this.label = label;
@@ -44,5 +50,8 @@ public class Editor {
     }
     public void setCreated_at(Date created_at) {
         this.created_at = created_at.toLocalDate();
+    }
+    public void setBooksDistribute(List<Book> booksDistribute) {
+        this.booksDistribute = booksDistribute;
     }
 }

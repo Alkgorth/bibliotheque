@@ -3,6 +3,7 @@ package cda.bibliotheque.dao;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +14,21 @@ public class EditorDAO {
 
     private Connection connection;
 
-    public EditorDAO(Connection connection) {
-        this.connection = connection;
+    private final DistributeDAO distributeDAO = new DistributeDAO();
+
+    public EditorDAO() {
+        connection = DatabaseConnection.getConnection();
     }
 
     public List<Editor> getAllEditors(){
         List<Editor> editors = new ArrayList<>();
         String sql = "SELECT id, label, create_at  FROM editor";
-        try (Statement stmt = (Statement) connection.createStatement(); java.sql.ResultSet rs = ((java.sql.Statement) stmt).executeQuery(sql)){
-            while (rs.next()) {
+        try (Statement stmt = connection.createStatement(); ResultSet rSet = stmt.executeQuery(sql)){
+            while (rSet.next()) {
                 editors.add(new Editor(
-                    rs.getInt("id"),
-                    rs.getString("label"),
-                    rs.getDate("create_at").toLocalDate()
+                    rSet.getInt("id"),
+                    rSet.getString("label"),
+                    rSet.getDate("create_at").toLocalDate()
                 ));
             }            
         } catch (SQLException e) {
@@ -35,8 +38,8 @@ public class EditorDAO {
     }
 
     public void addEditor(Editor editor){
-        String sql = "INSERT INTO editor (label, create_at) VALUES (?,?)";
-        try (java.sql.PreparedStatement pstmt = connection.prepareStatement(sql)){
+        String sql = "INSERT INTO editor (label, created_at) VALUES (?,?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setString(1, editor.getLabel());
             pstmt.setDate(2, editor.getCreated_at_Date());
             pstmt.executeUpdate();

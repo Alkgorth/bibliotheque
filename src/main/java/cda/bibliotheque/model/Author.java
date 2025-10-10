@@ -63,5 +63,20 @@ public class Author {
 
     public void setBorn_at(Date born_at) {
         this.born_at = born_at.toLocalDate();
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return this.firstname + " " + this.lastname;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+          return true;  
+        } 
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Author author = (Author) obj;
+        return id == author.id;
+    }
 }
